@@ -14,6 +14,15 @@ public class InstanceLambdaMain {
 		A a = () -> Bobject.bcd();
 		A a2 = Bobject::bcd;
 		
+		a.method();
+		a2.method();
+		System.out.println("-------------");
+		Atest atest = (b,k) -> b.bcd(k);
+		Atest atest2 = Bobject2::bcd;
+		
+		atest.abc(new Bobject2(), 10);
+		atest2.abc(new Bobject2(), 20);
+		
 		System.out.println("The end");
 		
 	}
