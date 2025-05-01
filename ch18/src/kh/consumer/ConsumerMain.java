@@ -1,8 +1,12 @@
 package kh.consumer;
 
 import java.util.Scanner;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
+
+import kh.lambda.Test;
 
 public class ConsumerMain {
 
@@ -15,21 +19,25 @@ public class ConsumerMain {
 		con.accept("구길동");
 		con.accept("저길동");
 		System.out.println("==============");
-
-//		Scanner scan = new Scanner(System.in);
-//		System.out.print("입력할 단을 입력하시오: ");
-//		int gugudan = Integer.parseInt(scan.nextLine());
-//		Consumer<String> con1 = t -> System.out.printf("%s 구구단 출력", t);
-//		for(int i = 0; i < ; i++) {
-//			
-//		}
-//		System.out.println("==============");
-
-		IntStream.rangeClosed(2, 9).forEach(dan -> {
-			System.out.println("[" + dan + "단]");
-			IntStream.rangeClosed(1, 9).mapToObj(i -> dan + " x " + i + " = " + (dan * i)).forEach(System.out::println);
-			System.out.println();
-		});
+		// ==================================
+		Consumer<Integer> con2 = t -> {
+			System.out.printf("%d단 출력", t);
+			for (int i = 0; i < 9; i++) {
+				System.out.printf("%d * %d = %d \n", t, i + 1, t * (i + 1));
+			}
+		};
+		con2.accept(5);
+		// ==================================
+		IntConsumer icon = t -> {
+			System.out.printf("%d단 출력", t);
+			for (int i = 0; i < 9; i++) {
+				System.out.printf("%d * %d = %d \n", t, i + 1, t * (i + 1));
+			}
+		};
+		// ==================================
+		BiConsumer<String, Integer> bicon = (name, age) -> System.out.printf("%s 님 나이는 %d입니다 \n", name, age);
+		bicon.accept("홍길동",60);
+		bicon.accept("저길동",50);
 
 		System.out.println("The end");
 	}
